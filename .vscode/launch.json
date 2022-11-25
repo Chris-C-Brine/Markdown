@@ -1,0 +1,10 @@
+{
+    "configurations": [
+        {
+            "name": "Launch chrome against localhost",
+            "type": "chrome",
+            "request": "launch",
+            "webRoot": "${workspaceFolder}/dist"
+        }
+    ]
+}
