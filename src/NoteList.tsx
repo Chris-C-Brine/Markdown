@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react"
+import { useMemo, useState } from 'react'
 import {
   Badge,
   Button,
@@ -8,11 +8,11 @@ import {
   Modal,
   Row,
   Stack,
-} from "react-bootstrap"
-import { Link } from "react-router-dom"
-import ReactSelect from "react-select"
-import { Tag } from "./App"
-import styles from "./NoteList.module.css"
+} from 'react-bootstrap'
+import { Link } from 'react-router-dom'
+import ReactSelect from 'react-select'
+import { Tag } from './App'
+import styles from './NoteList.module.css'
 
 type SimplifiedNote = {
   tags: Tag[]
@@ -42,17 +42,17 @@ export function NoteList({
   onDeleteTag,
 }: NoteListProps) {
   const [selectedTags, setSelectedTags] = useState<Tag[]>([])
-  const [title, setTitle] = useState("")
+  const [title, setTitle] = useState('')
   const [editTagsModalIsOpen, setEditTagsModalIsOpen] = useState(false)
 
   const filteredNotes = useMemo(() => {
-    return notes.filter(note => {
+    return notes.filter((note) => {
       return (
-        (title === "" ||
+        (title === '' ||
           note.title.toLowerCase().includes(title.toLowerCase())) &&
         (selectedTags.length === 0 ||
-          selectedTags.every(tag =>
-            note.tags.some(noteTag => noteTag.id === tag.id)
+          selectedTags.every((tag) =>
+            note.tags.some((noteTag) => noteTag.id === tag.id)
           ))
       )
     })
@@ -86,7 +86,7 @@ export function NoteList({
               <Form.Control
                 type="text"
                 value={title}
-                onChange={e => setTitle(e.target.value)}
+                onChange={(e) => setTitle(e.target.value)}
               />
             </Form.Group>
           </Col>
@@ -94,15 +94,15 @@ export function NoteList({
             <Form.Group controlId="tags">
               <Form.Label>Tags</Form.Label>
               <ReactSelect
-                value={selectedTags.map(tag => {
+                value={selectedTags.map((tag) => {
                   return { label: tag.label, value: tag.id }
                 })}
-                options={availableTags.map(tag => {
+                options={availableTags.map((tag) => {
                   return { label: tag.label, value: tag.id }
                 })}
-                onChange={tags => {
+                onChange={(tags) => {
                   setSelectedTags(
-                    tags.map(tag => {
+                    tags.map((tag) => {
                       return { label: tag.label, id: tag.value }
                     })
                   )
@@ -114,7 +114,7 @@ export function NoteList({
         </Row>
       </Form>
       <Row xs={1} sm={2} lg={3} xl={4} className="g-3">
-        {filteredNotes.map(note => (
+        {filteredNotes.map((note) => (
           <Col key={note.id}>
             <NoteCard id={note.id} title={note.title} tags={note.tags} />
           </Col>
@@ -150,7 +150,7 @@ function NoteCard({ id, title, tags }: SimplifiedNote) {
               direction="horizontal"
               className="justify-content-center flex-wrap"
             >
-              {tags.map(tag => (
+              {tags.map((tag) => (
                 <Badge className="text-truncate" key={tag.id}>
                   {tag.label}
                 </Badge>
@@ -178,13 +178,13 @@ function EditTagsModal({
       <Modal.Body>
         <Form>
           <Stack gap={2}>
-            {availableTags.map(tag => (
+            {availableTags.map((tag) => (
               <Row key={tag.id}>
                 <Col>
                   <Form.Control
                     type="text"
                     value={tag.label}
-                    onChange={e => onUpdateTag(tag.id, e.target.value)}
+                    onChange={(e) => onUpdateTag(tag.id, e.target.value)}
                   />
                 </Col>
                 <Col xs="auto">
