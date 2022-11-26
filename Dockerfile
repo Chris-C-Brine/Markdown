@@ -3,7 +3,5 @@ WORKDIR /workspaces/react-note-taking-app
 COPY ./package*.json ./
 RUN npm install --quiet
 COPY ./ .
-RUN npm install
-RUN npm run build
-CMD ["serve", "dist/"]
+CMD ["npm", "run", "build"]
 EXPOSE 3000
